@@ -1,3 +1,4 @@
+// Command govids creates a partial JSON file from YouTube playlist ID.
 package main
 
 import (
@@ -31,7 +32,14 @@ type Video struct {
 	Date  time.Time `json:"date"`
 }
 
+func usage() {
+	fmt.Fprintf(os.Stderr, "Usage: %s [OPTIONS] <YouTube playlist ID>\n", os.Args[0])
+	flag.PrintDefaults()
+}
+
 func main() {
+	flag.Usage = usage
+
 	var tag string
 	flag.StringVar(&tag, "tag", "", "tag to add to all playlist items")
 	flag.Parse()
